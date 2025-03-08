@@ -1,5 +1,7 @@
 package com.software;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -14,9 +16,23 @@ public class minHash {
 
     // 生成一个哈希值
     private int generateHash(String str, int seed) {
-        int hashValue = str.hashCode();
-        int prime = 101;
-        return Math.abs((seed * hashValue) % prime);
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+            byte[] hashBytes = digest.digest(str.getBytes());
+
+            // 将 SHA-256 的哈希值的前4字节转换为整数值
+            int hashValue = 0;
+            for (int i = 0; i < Math.min(hashBytes.length, 4); i++) {
+                hashValue = (hashValue << 8) | (hashBytes[i] & 0xFF);
+            }
+
+            int prime = 101;
+            return Math.abs((seed * hashValue) % prime);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     // 计算集合的MinHash签名
