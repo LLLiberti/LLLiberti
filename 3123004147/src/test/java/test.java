@@ -1,8 +1,10 @@
+import com.software.checkPlagiarism;
 import com.software.minHash;
 import com.software.tfIdf;
 import com.software.utils;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,5 +65,14 @@ public class test {
         // 估算Jaccard相似度
         double jaccardSimilarity = minHash.jaccardSimilarity(set1, set2);
         System.out.println(String.format("%.2f", jaccardSimilarity));
+    }
+
+    @Test
+    public void testcheckPlag() throws IOException {
+        String origPath = "C:\\Users\\lbq\\Desktop\\orig.txt";
+        String plagiarizedPath = "C:\\Users\\lbq\\Desktop\\orig_0.8_add.txt";
+        String outputPath = "C:\\Users\\lbq\\Desktop\\ans.txt";
+
+        checkPlagiarism.checkPlagiarism(origPath,plagiarizedPath,outputPath);
     }
 }

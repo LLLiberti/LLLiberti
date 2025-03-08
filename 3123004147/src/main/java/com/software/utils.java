@@ -21,7 +21,7 @@ public class utils {
 
     public static List<String> segmentText(String text) {
         text = text.replaceAll("[\\p{P}\\p{S}]", "");
-        JiebaSegmenter segmenter = new JiebaSegmenter();
-        return segmenter.sentenceProcess(text);
+        JiebaSegmenter segment = new JiebaSegmenter();
+        return segment.sentenceProcess(text);
     }
 }

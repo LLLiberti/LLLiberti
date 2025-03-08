@@ -1,16 +1,12 @@
 package com.software;
 
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Set;
 
 public class minHash {
-    // 用于生成哈希函数的随机数
-    private static final Random random = new Random();
 
     // 假设有n个哈希函数
-    private int numHashFunctions;
-    private int prime = 101;
+    private final int numHashFunctions;
 
     public minHash(int numHashFunctions) {
         this.numHashFunctions = numHashFunctions;
@@ -19,6 +15,7 @@ public class minHash {
     // 生成一个哈希值
     private int generateHash(String str, int seed) {
         int hashValue = str.hashCode();
+        int prime = 101;
         return Math.abs((seed * hashValue) % prime);
     }
 
