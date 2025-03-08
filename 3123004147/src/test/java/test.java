@@ -1,11 +1,9 @@
+import com.software.minHash;
 import com.software.tfIdf;
 import com.software.utils;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class test {
@@ -46,5 +44,24 @@ public class test {
         System.out.println(doc2Map);
         System.out.println(doc1Sset);
         System.out.println(doc2Sset);
+    }
+
+    @Test
+    public void testMinHash() {
+        Set<String> set1 = new HashSet<>();
+        set1.add("番茄");
+        set1.add("banana");
+        set1.add("orange");
+
+        Set<String> set2 = new HashSet<>();
+        set2.add("grape");
+        set2.add("西红柿");
+
+        // 设定MinHash哈希函数的数量
+        minHash minHash = new minHash(100);
+
+        // 估算Jaccard相似度
+        double jaccardSimilarity = minHash.jaccardSimilarity(set1, set2);
+        System.out.println(String.format("%.2f", jaccardSimilarity));
     }
 }
