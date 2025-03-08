@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class utils {
+
     public static String readFile(String filePath) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         StringBuilder sb = new StringBuilder();
