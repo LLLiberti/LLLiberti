@@ -40,8 +40,6 @@ public class test {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
 
-        System.out.println(doc1Tokens);
-        System.out.println(doc2Tokens);
         System.out.println(doc1Map);
         System.out.println(doc2Map);
         System.out.println(doc1Sset);
@@ -74,5 +72,30 @@ public class test {
         String outputPath = "C:\\Users\\lbq\\Desktop\\ans.txt";
 
         checkPlagiarism.checkPlagiarism(origPath,plagiarizedPath,outputPath);
+    }
+
+    @Test
+    public void testcheckPlagEx() throws IOException {
+
+        //路径错误
+        String origPath1 = "C:\\Users\\lbq\\Desktop\\orig1.txt";
+        String plagiarizedPath1 = "C:\\Users\\lbq\\Desktop\\orig_0.8_add.txt";
+        String outputPath1 = "C:\\Users\\lbq\\Desktop\\ans.txt";
+
+        //空路径
+        String origPath2 = "";
+        String plagiarizedPath2 = "C:\\Users\\lbq\\Desktop\\orig_0.8_add.txt";
+        String outputPath2 = "C:\\Users\\lbq\\Desktop\\ans.txt";
+
+        String origPath3 = "C:\\Users\\lbq\\Desktop\\orig.txt";
+        //空文章
+        String plagiarizedPath3 = "C:\\Users\\lbq\\Desktop\\1.txt";
+        String outputPath3 = "C:\\Users\\lbq\\Desktop\\ans.txt";
+
+        checkPlagiarism.checkPlagiarism(origPath1,plagiarizedPath1,outputPath1);
+
+        checkPlagiarism.checkPlagiarism(origPath2,plagiarizedPath2,outputPath2);
+
+        checkPlagiarism.checkPlagiarism(origPath3,plagiarizedPath3,outputPath3);
     }
 }

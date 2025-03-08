@@ -11,9 +11,27 @@ import java.util.stream.Collectors;
 
 public class checkPlagiarism {
     public static void checkPlagiarism(String origPath, String plagiarizedPath, String outputPath) throws IOException {
+
+        if (plagiarizedPath == null || plagiarizedPath.isEmpty()
+                || origPath == null || origPath.isEmpty()
+                || outputPath == null || outputPath.isEmpty()){
+            System.out.println("路径不能为空！");
+            return;
+        }
+
         // 读取文件内容
         String origText = utils.readFile(origPath);
         String plagText = utils.readFile(plagiarizedPath);
+
+        if(origText == null || plagText == null ){
+            System.out.println("文件不存在，请输入正确的路径！");
+            return;
+        }
+
+        if(origText.isEmpty() || plagText.isEmpty()){
+            System.out.println("论文为空！");
+            return;
+        }
 
         // 使用jieba分词
         List<String> origToken = utils.segmentText(origText);
