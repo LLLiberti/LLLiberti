@@ -14,25 +14,30 @@ public class minHash {
         this.numHashFunctions = numHashFunctions;
     }
 
+    private static final MessageDigest digestInstance = createMessageDigest();
+
+    private static MessageDigest createMessageDigest() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // 生成一个哈希值
     private int generateHash(String str, int seed) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
-            byte[] hashBytes = digest.digest(str.getBytes());
+        byte[] hashBytes = digestInstance.digest(str.getBytes());
 
-            // 将 SHA-256 的哈希值的前4字节转换为整数值
-            int hashValue = 0;
-            for (int i = 0; i < Math.min(hashBytes.length, 4); i++) {
-                hashValue = (hashValue << 8) | (hashBytes[i] & 0xFF);
-            }
+        // 将 SHA-256 的哈希值的前4字节转换为整数值, 只取 SHA-256 的前4字节
+        int hashValue = ((hashBytes[0] & 0xFF) << 24) |
+                ((hashBytes[1] & 0xFF) << 16) |
+                ((hashBytes[2] & 0xFF) << 8) |
+                (hashBytes[3] & 0xFF);
 
-            int prime = 101;
-            return Math.abs((seed * hashValue) % prime);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return 0;
-        }
+
+        int prime = 101;
+        return Math.abs((seed * hashValue) % prime);
     }
 
     // 计算集合的MinHash签名
